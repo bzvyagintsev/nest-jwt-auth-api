@@ -1,9 +1,10 @@
 const process = require('process');
 const fs = require('fs');
 
-const username = process.env.POSTGRES_USER || 'user1';
-const password = process.env.POSTGRES_PASSWORD || 'testpass';
-const crt = fs.readFileSync('root.crt') || undefined;
+const username = process.env.DB_USER || 'user1';
+const password = process.env.DB_PASSWORD || 'testpass';
+
+const crt = fs.readFileSync(__dirname + '/root.crt');
 
 module.exports = {
   type: 'mysql',
@@ -12,12 +13,10 @@ module.exports = {
   username,
   password,
   database: 'db1',
-  ssl: crt
-    ? {
-        ca: crt,
-      }
-    : false,
-  entities: [__dirname + "/**/*.entity.js"],
+  ssl: {
+    ca: crt,
+  },
+  entities: [__dirname + '/**/*.entity.js'],
   migrations: ['/migration/*.ts'],
   cli: {
     migrationsDir: 'migration',
