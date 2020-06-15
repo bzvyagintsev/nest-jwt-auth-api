@@ -3,8 +3,8 @@ API для создания нового пользователя и аутен�
 
 API:
 
-- Sign up: 84.201.128.110:3000/auth/signup
-- Login: 84.201.128.110:3000/auth/login
+- Sign up: /auth/signup
+- Login: /auth/login
 
 ```bash
 body {
